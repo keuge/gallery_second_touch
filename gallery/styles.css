@@ -1,0 +1,748 @@
+/*Область для ссылок зарегистрироваться и назад*/
+#register_box_input
+{
+    text-align: center;
+    margin-top: 2%;
+    font-size: 16px;
+    font-family: verdana, arial, helvetica, sans-serif;
+}
+/*Область для ссылок зарегистрироваться и назад*/
+/*Внешний вид ссылок зарегистрироваться и назад*/
+#register_box_input a:link
+{
+    font-size: 16px;
+}
+/*Внешний вид ссылок зарегистрироваться и назад*/
+/*Область ссылки перехода в галерею*/
+#gallery_link_box
+{
+    position: relative;
+    width: 100px;
+    float: left;
+    margin-top: -36px;
+}
+/*Область ссылки перехода в галерею*/
+/*Ссылка перехода в галерею*/
+#gallery_link_box a:link
+{
+    font-size: 60px;
+    text-decoration: none;
+}
+/*Ссылка перехода в галерею*/
+/*Область ссылки перехода в главное меню из страницы авторизации*/
+#back_to_index_from_login
+{
+    text-align: center;
+    margin-top: 2%;
+    font-size: 16px;
+    font-family: verdana, arial, helvetica, sans-serif;
+}
+/*Область ссылки перехода в главное меню из страницы авторизации*/
+/*Область ссылки перехода в главное меню из страницы восстановления пароля*/
+#back_to_index_from_recovery_box
+{
+    text-align: center;
+    margin-top: 2%;
+    font-size: 16px;
+    font-family: verdana, arial, helvetica, sans-serif;
+}
+/*Область ссылки перехода в главное меню из страницы восстановления пароля*/
+/*Внешний вид ссылки перехода в главное меню из страницы авторизации*/
+#back_to_index_from_login a:link
+{
+    font-size: 16px;
+}
+/*Внешний вид ссылки перехода в главное меню из страницы авторизации*/
+/*Область ссылки для восстановления пароля*/
+#forgot_password_box
+{
+    text-align: center;
+    padding-top: 13px;
+}
+/*Область ссылки для восстановления пароля*/
+/*Cсылка для восстановления пароля*/
+#forgot_password_box a:link
+{
+    font-size: 10px;
+}
+/*Ссылка для восстановления пароля*/
+/*Область ссылок логина, регистрации*/
+#register_login_box
+{
+    text-align: center;
+    margin-top: 2%;
+    font-size: 16px;
+    font-family: verdana, arial, helvetica, sans-serif;
+}
+/*Область ссылок логина, регистрации*/
+#register_box a:hover
+{
+    color: #f2283b;
+}
+/*Область меню для авторизации*/
+.menu_box
+{
+    width: 420px;
+    text-align: center;
+    border-radius: 3px;
+    margin-left: auto;
+    margin-right: auto;
+    /* padding-right: 22px; */
+    padding-bottom: 6px;
+    background: rgba(236, 87, 121, 0.75);
+}
+/*Область меню для авторизации*/
+/*Область авторизованного меню*/
+.auth_box
+{
+    width: 360px;
+    text-align: center;
+    border-radius: 3px;
+    margin-left: auto;
+    margin-right: auto;
+    /* padding-right: 22px; */
+    padding-bottom: 6px;
+    background: rgba(236, 87, 121, 0.75);
+}
+/*Область авторизованного меню*/
+/*Фон для заглавных страниц*/
+#background
+{
+    background: url(http://i.imgur.com/YwL94AM.jpg);
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+/*Фон для заглавных страниц*/
+/*Область ссылок гелереи и выхода из учетной записи*/
+#gallery_exit_box
+{
+    text-align: center;
+    margin-top: 2%;
+    font-size: 16px;
+    font-family: verdana, arial, helvetica, sans-serif;
+}
+/*Область ссылок гелереи и выхода из учетной записи*/
+/*Внещний вид ссылок гелереи и выхода из учетной записи*/
+
+#gallery_exit_box a:link
+{
+    font-size: 40px;
+    text-align: center;
+    margin: 10px;
+}
+/*Внешний вид ссылок гелереи и выхода из учетной записи*/
+/*Приветствие на заглавной странице*/
+#important_index_message
+{
+    margin-top:0%;padding-bottom: 2%;text-align: center;color: #ececec;font-size:5vw;font-family: verdana, arial, helvetica, sans-serif
+}
+/*Приветствие на заглавной странице*/
+/*Внешний вид ссылок логина, регистрации*/
+#register_login_box a:link
+{
+    font-size: 40px;
+    text-align: center;
+    margin: 10px;
+}
+/*Внешний вид ссылок логина, регистрации*/
+/*Область авторизации*/
+#login_box
+{
+    border-radius: 5px;
+    background: rgba(236, 236, 236, 0.75);
+    padding-bottom: 33px;
+    margin-top:9%;
+    width: 420px;
+    margin-left: auto;
+    margin-bottom: 22px;
+    margin-right: auto;
+    text-align: center;
+    font-size: 16px;
+    padding-top: 39px;
+    /*padding-bottom: 3%;*/
+    font-family: verdana, arial, helvetica, sans-serif;
+    /*background: url(http://www.spletnik.ru/thumb/340x220_10/img/2015/02/yunna/20150209-cover-anons.jpg) no-repeat center center fixed;*/
+    /*background-size: 100%; *//* Современные браузеры */
+    /*-webkit-background-size: cover;*/
+    /*-moz-background-size: cover;*/
+    /*-o-background-size: cover;*/
+    /*background-size: cover;*/
+}
+/*Область авторизации*/
+/*Область регистрации*/
+#register_box
+{
+    border-radius: 5px;
+    background: rgba(236, 236, 236, 0.75);
+    padding-bottom: 33px;
+    margin-top:9%;
+    width: 420px;
+    margin-left: auto;
+    margin-bottom: 22px;
+    margin-right: auto;
+    text-align: center;
+    font-size: 16px;
+    padding-top: 39px;
+    /*padding-bottom: 3%;*/
+    font-family: verdana, arial, helvetica, sans-serif;
+    /*background: url(http://www.spletnik.ru/thumb/340x220_10/img/2015/02/yunna/20150209-cover-anons.jpg) no-repeat center center fixed;*/
+    /*background-size: 100%; *//* Современные браузеры */
+    /*-webkit-background-size: cover;*/
+    /*-moz-background-size: cover;*/
+    /*-o-background-size: cover;*/
+    /*background-size: cover;*/
+}
+/*Область регистрации*/
+/*Область восстановления пароля*/
+#password_recovery_box
+{
+    border-radius: 5px;
+    background: rgba(236, 236, 236, 0.75);
+    padding-bottom: 33px;
+    margin-top:9%;
+    width: 420px;
+    margin-left: auto;
+    margin-bottom: 22px;
+    margin-right: auto;
+    text-align: center;
+    font-size: 16px;
+    padding-top: 39px;
+    /*padding-bottom: 3%;*/
+    font-family: verdana, arial, helvetica, sans-serif;
+    /*background: url(http://www.spletnik.ru/thumb/340x220_10/img/2015/02/yunna/20150209-cover-anons.jpg) no-repeat center center fixed;*/
+    /*background-size: 100%; *//* Современные браузеры */
+    /*-webkit-background-size: cover;*/
+    /*-moz-background-size: cover;*/
+    /*-o-background-size: cover;*/
+    /*background-size: cover;*/
+}
+/*Область восстановления пароля*/
+/*Внешний вид ссылки в области восстановления пароля*/
+#password_recovery_box a:link
+{
+    font-size: 16px;
+}
+/*Внешний вид ссылки в области восстановления пароля*/
+.auth_alert
+{
+    font-size: 18px;
+    font-family: verdana, arial, helvetica, sans-serif;
+    padding-top: 8px;
+    text-align: center;
+    width: 50%;
+    text-align: center;
+    margin-left:auto;
+    color: rgba(246, 90, 92, 0.73);
+    height: 33px;
+    margin-right:auto; background: rgb(236, 236, 236) transparent;
+
+    /* RGBa with 0.6 opacity */
+    /*background: rgba(236, 87, 121, 0.75);*/
+    background-color: #000000;
+}
+.email_recover
+{
+    font-size: 14px;
+    font-family: verdana, arial, helvetica, sans-serif;
+    text-align: center;
+    text-align: center;
+    padding-top: 13px;
+    margin-left:auto;
+    width: 60%;
+    color: rgba(246, 90, 92, 0.73);
+    height: 33px;
+    margin-right:auto; background: rgb(236, 236, 236) transparent;
+
+    /* RGBa with 0.6 opacity */
+    /*background: rgba(236, 87, 121, 0.75);*/
+    background-color: #000000;
+}
+.email_changed
+{
+font-size: 14px;
+    font-family: verdana, arial, helvetica, sans-serif;
+    text-align: center;
+    padding-top: 8px;
+    width: 60%;
+    text-align: center;
+    margin-left:auto;
+    color: rgba(246, 90, 92, 0.73);
+    height: 33px;
+    margin-right:auto; background: rgb(236, 236, 236) transparent;
+
+    /* RGBa with 0.6 opacity */
+    /*background: rgba(236, 87, 121, 0.75);*/
+    background-color: #000000;
+}
+
+/*Внешний вид расположения картинок в галерее*/
+div.container
+{
+    width:1000px;
+    margin:0 auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+div.container a
+{ margin:0 10px 10px 0;
+    text-decoration:none;
+    display:inline-block;
+    border-radius:5px;
+    border:2px solid #dbf6ff;
+}
+div.container img
+{
+    border:0;
+    height:300px;
+}
+div.container:hover input
+{
+    display: block;
+}
+div.container input
+{
+    position:absolute;
+    top: 15px;
+    right: 13px;
+}
+/*Внешний вид расположения картинок в галерее*/
+.categories
+{
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 22px;
+    font-family: verdana, arial, helvetica, sans-serif;
+}
+.categories_font
+{
+    font-size: 22px;
+}
+.login_input
+{
+    font-size: 25px;
+    font-family: verdana, arial, helvetica, sans-serif;
+}
+/*Кнопка отправки формы на восстановление пароля*/
+.restore_input
+{
+    font-size: 16px;
+    font-family: verdana, arial, helvetica, sans-serif;
+}
+/*Кнопка отправки формы на восстановление пароля*/
+/*Кнопка отправки формы на авторизацию*/
+.login_submit
+{
+    font-size: 16px;
+    font-family: verdana, arial, helvetica, sans-serif;
+}
+/*Кнопка отправки формы на восстановление пароля*/
+/*Форма ввода нового пароля*/
+.reset_password_input
+{
+    font-size: 25px;
+    font-family: verdana, arial, helvetica, sans-serif;
+}
+/*Форма ввода нового пароля*/
+/*Кнопка подтверждения изменения нового пароля*/
+.reset_password_submit
+{
+    font-size: 16px;
+    font-family: verdana, arial, helvetica, sans-serif;
+}
+/*Кнопка подтверждения изменения нового пароля*/
+a:link.login_input
+{
+    font-size: 77px;
+    font-family: verdana, arial, helvetica, sans-serif;
+    border-radius: 4px;
+}
+.reg_input
+{
+    font-size: 16px;
+    font-family: verdana, arial, helvetica, sans-serif;
+    text-align: center;
+    /*border-color: #6b7276;*/
+}
+.menu_auth
+{
+    font-size: 36px;
+    margin-top: 2%;
+    margin-left: 41%;
+    width: 50%;
+    height: 100px;
+    text-align: center;
+}
+#upload_link
+{
+    text-decoration:none;
+}
+/*Область для загрузки изображений*/
+#upload_form
+{
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+/*Область для загрузки изображений*/
+/*Ссылка на показ всех картинок в галерее*/
+.categories a:link
+{
+    font-size: 22px;
+    background-color: #DDDDDD;
+    border-radius: 2px;
+    padding-right: 4px;
+    padding-left: 4px;
+}
+/*Ссылка на показ всех картинок в галерее*/
+.exit
+{
+    text-align: center;
+}
+.hello
+{
+    text-align: center;
+    font-family: verdana, arial, helvetica, sans-serif;
+    margin-top:0%;
+    padding-bottom: 2%;
+    text-align: center;
+    color: #ececec;
+    font-size:5vw;
+    font-family: verdana, arial, helvetica, sans-serif;
+}
+#menu_auth
+{
+
+    text-align: center;
+    padding-top: 2%;
+    padding-bottom: 3%;
+    word-spacing: 7px;
+}
+#upload
+{
+    font-size: 15px;
+}
+/*Форма загрузки изображения*/
+#upload_image
+{
+    /*display: none;*/
+    font-size: 15px;
+    /*text-align: center;*/
+    position: relative;
+    border:none;
+    border-radius: 2px;
+    font-family: verdana, arial, helvetica, sans-serif;
+}
+/*Форма загрузки изображения*/
+/*Область форм загрузки изображения*/
+#upload_image_form
+{
+    /*display: none;*/
+    font-size: 15px;
+    /*text-align: center;*/
+    position: relative;
+    border:none;
+    border-radius: 2px;
+    font-family: verdana, arial, helvetica, sans-serif;
+}
+/*Область форм загрузки изображения*/
+/*Область закрытия, открытия формы загрузки изображения*/
+#open_close_links_upload_image
+{
+    width: 1000px;
+    text-align: center;
+}
+/*Область закрытия, открытия формы загрузки изображения*/
+/*Стиль ссылки открытия, закрытия формы по загрузке изображений*/
+#open_close_links_upload_image a:link
+{
+    text-decoration: none;
+    font-size: 55px;
+}
+/*Стиль ссылки открытия, закрытия формы по загрузке изображений*/
+/*Кнопка загрузки картинки*/
+#upload_image_file_image_button
+{
+    position: absolute;
+    opacity: 0;
+    -moz-opacity: 0;
+    filter: alpha(opacity=0);
+}
+/*Кнопка загрузки картинки*/
+/*Дизайн кнопки загрузки картинки*/
+#style_upload_image_file_image_button
+{
+    background-color: #DDDDDD;
+    padding-left: 7px;
+    padding-right: 7px;
+    font-family: verdana, arial, helvetica, sans-serif;
+    border-radius: 2px;
+}
+/*Дизайн кнопки загрузки картинки*/
+/*Кнопка перехода на заглавную страницу из галереи*/
+#gallery_index_link
+{
+    font-size: 70px;
+    float: left;
+    height: 100%;
+    margin-top: 16%;
+    padding-top: 3px;
+    position: fixed;
+    width: 60px;
+    text-decoration: none;
+}
+/*Кнопка перехода на заглавную страницу из галереи*/
+/*Вся страница галереи*/
+#width_hundred_percent
+{
+    width:100%;
+    margin-bottom: 13px;
+}
+/*Вся страница галереи*/
+/*Кнопка удаления картинки*/
+#delete_link_image
+{
+    max-height:25px;
+    margin-left: 2%;
+    float: right;
+}
+/*Кнопка удаления картинки*/
+/*Внешний вид картинки на персональной ссылке*/
+#image_form_image
+{
+    border-radius: 2%;
+    box-shadow:0 1px 4px rgba(0, 0, 0, .3), -19px 0 10px -22px rgba(0, 0, 0, .8), 22px 0 10px -23px rgba(0, 0, 0, .8), 0 0 40px rgba(0, 0, 0, .1) inset;
+    position: relative;
+    max-height:600px;
+    max-width:700px;
+}
+/*Внешний вид картинки на персональной ссылке*/
+#upload_image_back:hover
+{
+    color: #f2283b;
+}
+/*Поле куда вводишь название категории для поиска*/
+#input_search_picture_category
+{
+    font-family: verdana, arial, helvetica, sans-serif;
+    border: none;
+    font-size: 15px;
+}
+/*Поле куда вводишь название категории для поиска*/
+/*Форма поиска картинок по категории*/
+#form_search_picture_category
+{
+    width:490px;
+    margin-left: auto;
+    margin-right:auto;
+}
+/*Форма поиска картинок по категории*/
+.upload_success
+{
+    font-family: verdana, arial, helvetica, sans-serif;
+    font-size: 15px;
+    text-align: center;
+}
+/*Разукрасить ссылки*/
+a:link
+{
+    color: #0e0e13;
+    font-family: verdana, arial, helvetica, sans-serif;
+    font-size: 30px;
+    text-decoration: none;
+}
+a:visited
+{
+    color: #0e0e13;
+}
+a:hover
+{
+    color: #f2283b;
+    text-decoration:none;
+}
+a:active
+{
+    color: #f2283b;
+}
+/*Разукрасить ссылки*/
+/*Внешний вид формы редактирования описания изображения*/
+#form_edit_image_description
+{
+    display: none;
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    margin-top: 14px;
+    background-color: #F5F5F5;
+}
+/*Внешний вид формы редактирования описания изображения*/
+/*Отображение информации о картинке*/
+#show_all_info_about_image
+{
+    margin-top: 15px;
+    border: none;
+    font-family: verdana, arial, helvetica, sans-serif;
+    font-size: 22px;
+    color: #797979;
+    height: 6%;
+}
+/*Отображение информации о картинке*/
+/*Контроль формы изменения данных картинки*/
+#to_control_form_edit_image_description
+{
+    width: 100%;
+}
+/*Контроль формы изменения данных картинки*/
+/*Кнопка закрытия формы редактирования картинки*/
+#close_form_link
+{
+    display: none;
+}
+/*Кнопка закрытия формы редактирования картинки*/
+/*Кнопка открытия формы редактирования картинки*/
+#open_form_link
+{
+
+}
+/*Кнопка открытия формы редактирования картинки*/
+/*Скрыть форму загрузки картинки*/
+#close_form_upload_image
+{
+    display: none;
+}
+/*Скрыть форму загрузки картинки*/
+/*Форма редактирования данных картинки*/
+.edit_image_data
+{
+    border: none;
+    background-color: #F5F5F5;
+    color: #a0a0a0; font-size: 22px;
+    text-align: center;
+    font-family: verdana, arial, helvetica, sans-serif;
+}
+/*Форма редактирования данных картинки*/
+/*Тексты подтверждения регистрации на сайте*/
+.confirm_alert
+{
+    margin-top:0%;
+    padding-bottom: 2%;
+    text-align: center;
+    color: #ececec;
+    font-size:60px;
+    font-family: verdana, arial, helvetica, sans-serif
+}
+/*Тексты подтверждения регистрации на сайте*/
+/*Текст уведомления о перезгрузке страницы после подтверждения регистрации*/
+.auth_refresh_5
+{
+    margin-top:0%;
+    padding-bottom: 2%;
+    text-align: center;
+    color: #ececec;
+    font-size:25px;
+    font-family: verdana, arial, helvetica, sans-serif
+}
+/*Тексты подтверждения регистрации на сайте*/
+/*Блок восстановления пароля*/
+.recovery_password_box
+{
+    border-radius: 5px;
+    background: rgba(236, 236, 236, 0.75);
+    padding-bottom: 2%;
+    margin-top:9%;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-size: 20px;
+    padding-top: 1%;
+    /*padding-bottom: 3%;*/
+    font-family: verdana, arial, helvetica, sans-serif;
+}
+/*Блок восстановления пароля*/
+.brd
+{
+    border-bottom: 1px solid #ccc;
+}
+body
+{
+    background-color: #f5f5f5;
+}
+.cat
+{
+    border-bottom: 1px solid #ccc;
+    background-color: #d5dde9;
+}
+.cat:hover
+{
+    border-bottom: 1px solid #ccc;
+    background-color: #d5dde9;
+    color: #666;
+}
+.register_form
+{
+    font-family: verdana, arial, helvetica, sans-serif;
+    padding-top: 10em;
+}
+.menu
+{
+    margin-bottom: 88px;
+}
+
+.item
+{
+    /*width: 100%;*/
+    margin: 5%;
+    background-color: #e3e2ed;
+}
+
+.image
+{
+    overflow: hidden;
+    width: 100px;
+    height: 100px;
+    position: static;
+}
+.image_form
+{
+    height: 720px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 3%;
+    /* position: relative; */
+    width: 700px;
+}
+.exitbutton
+{
+    display: block;
+    padding: 5px;
+    text-decoration: none;
+    color: #071327;
+    border: 1px solid #ebf3ff;
+    background-color: #d5dde9;
+    border-bottom: none;
+    width: 240px;
+    font-family: verdana, arial, helvetica, sans-serif;
+    font-size: 19px;
+    text-align: center;
+
+}
+.exitbutton:hover
+{
+    background-color: #053880;
+    color: #F2283B;
+
+}
+.inputform
+{
+    background-color: #000033;
+}
+.verdana
+{
+    font-family: verdana, arial, helvetica, sans-serif;
+}
