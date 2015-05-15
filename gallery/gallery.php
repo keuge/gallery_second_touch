@@ -2,24 +2,35 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <script src="/project/functions/jquery-2.1.3.js"></script>
-    <script src="/project/functions/jquery.fakecrop.js"></script>
+    <script src="/project/sky_request/gallery/functions/jquery-2.1.3.js"></script>
+    <script src="/project/sky_request/gallery/functions/jquery.fakecrop.js"></script>
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <!--    Красиво заворачивает картинки-->
+    <script>
+        $(document).ready(function () {
+            $('.container img').fakecrop({wrapperWidth: 300, wrapperHeight: 300});
+        });
+    </script>
+    <!--    Красиво заворачивает картинки-->
+    <!--    Подтверждение удаления картинки-->
+    <script>
+        function confirmDelete()
+        {
+            return ($(confirm("Точно удалить?")))
+        }
+    </script>
+    <!--    Подтверждение удаления картинки-->
 </head>
 <body>
 <?php
 session_start();
-include '../../functions/dbconnect.php';
+include  __DIR__.DIRECTORY_SEPARATOR.'/functions/dbconnect.php';
 ini_set('display_errors',1);
 error_reporting();
 ?>
 <a id="gallery_index_link" class='verdana' href="index.php">&#8610;</a>
 <div id="width_hundred_percent">
 <div id="upload_form">
-<!--    <div id="open_close_links_upload_image">-->
-<!--    <div id="open_form_upload_image" class="reply"><a href="">+</a></div>-->
-<!--    <div id="close_form_upload_image" class="reply"><a href="">-</a></div>-->
-<!--    </div>-->
 <div id="upload_image_form">
 <form  action="gallery.php" method="POST" enctype=multipart/form-data>
     <input type="file" id="upload_image_file_image_button" name="uploadfile"/>
@@ -59,7 +70,9 @@ if (isset($_FILES['uploadfile']['name']))
     $new_file_name = uniqid();
     $fot = $uploaddir.$new_file_name.'.'.end(explode('.', $_FILES['uploadfile']['name']));
     $imgsize = $_FILES['uploadfile']['size'];
-    echo '<br>';
+    ?>
+    <br>
+    <?php
     $imgname = $_POST['name'];
     $imgdesc = $_POST['description'];
     $imgcat = $_POST['category'];
@@ -73,8 +86,11 @@ if (isset($_FILES['uploadfile']['name']))
         (
             "INSERT INTO categories (category) VALUES ('".$imgcat."');"
         );
-        if($res AND $res2) echo "<div class='upload_success'></div>";
-        else echo "<div class='upload_success'>Путь не добавлен в базу данных, но файл загружен</div>";
+        if($res AND $res2)
+        {
+           ?> <div class='upload_success'></div><?php
+        }
+        else ?> <div class='upload_success'>Путь не добавлен в базу данных, но файл загружен</div><?php
     }}?>
 <!--Загрузка картинки в базу и папку-->
 <!--Вывод всех категорий в галерее-->
@@ -147,40 +163,5 @@ if (array_key_exists('delete_file', $_POST) AND array_key_exists('delete_db_file
 }
 ?>
 <!--Вывести на экран изображения из базы и добавить кнопку удалить к каждой картинке-->
-<!--Этот скрипт красиво заворачивает картинки-->
-<script>
-    $(document).ready(function () {
-        // for a filled square thumbnail
-        $('.container img').fakecrop({wrapperWidth: 300, wrapperHeight: 300});
-
-//        for a fixed width/height
-//        $('#crop img').fakecrop({fill: false});
-    });
-</script>
-<!--Этот скрипт красиво заворачивает картинки-->
-<script>
-    $(document).ready(function() //Скрытие форм редактирования
-    {
-        $(".reply").click(function()
-        {
-            if($("#open_form_upload_image").is(":visible"))
-            {
-                $("#open_form_upload_image").hide();
-                $("#upload_image_form").show();
-                $("#close_form_upload_image").show();
-            } else
-            {
-                $("#open_form_upload_image").show();
-                $("#upload_image_form").hide();
-                $("#close_form_upload_image").hide();
-            }
-            return false;
-        });
-    });
-    function confirmDelete()
-    {
-        return ($(confirm("Точно удалить?")))
-    }
-</script>
 </body>
 </html>

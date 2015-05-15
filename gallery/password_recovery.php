@@ -6,7 +6,7 @@
 </head>
 <body id="background">
 <?php
-include '../../functions/dbconnect.php';
+include  __DIR__.DIRECTORY_SEPARATOR.'/functions/dbconnect.php';
 if(!empty($_GET['recovery_login_confirm']))
 {
     ?>

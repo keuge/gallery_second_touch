@@ -7,13 +7,13 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
     <?php
     session_start();
-    include '../../functions/dbconnect.php';
+include  __DIR__.DIRECTORY_SEPARATOR.'/functions/dbconnect.php';
     ?>
 </head>
-<body id="background" >
+<body id="background">
 <?php
 // Проверяем, авторизованы ли мы
-if (empty($_SESSION['login']) or empty($_SESSION['id'])) //если нет, то предлагаем зарегаться
+if (empty($_SESSION['login']) or empty($_SESSION['id'])) //если нет, то выводим меню, доступное для незарегистрированных пользователей
 {
 ?>
 <div>
@@ -23,19 +23,19 @@ if (empty($_SESSION['login']) or empty($_SESSION['id'])) //если нет, то
     <br>
     </div>
     <?php
-if($_GET['register_code'] !== NULL)
-{
-    include 'confirm_reg.php';
-}
-else
-{?>
-    <div id="important_index_message">
-        Картинки
-        <br>
-        тут!
-    </div>
+    if($_GET['register_code'] !== NULL)
+    {
+        include  __DIR__.DIRECTORY_SEPARATOR.'confirm_reg.php';
+    }
+    else
+    {?>
+        <div id="important_index_message">
+            Картинки
+            <br>
+            тут!
+        </div>
     <?php
-}
+    }
     ?>
 <?php
 }

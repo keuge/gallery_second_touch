@@ -6,7 +6,7 @@
     </head>
 <body>
 <?php
-include $_SERVER['DOCUMENT_ROOT'].'/project/functions/dbconnect.php';
+include __DIR__.DIRECTORY_SEPARATOR.'/functions/dbconnect.php';
 $register_code_confirm = $_GET['register_code'];
 $sql_confirm_email = "UPDATE users SET register_code=NULL WHERE register_code='$register_code_confirm'";
 $do_sql_confirm_email = mysql_query($sql_confirm_email, $link) or die(mysql_error());
@@ -26,5 +26,5 @@ else
 }
 ?>
 </body>
-</html>
+>
 

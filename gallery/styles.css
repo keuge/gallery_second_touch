@@ -518,8 +518,8 @@ a:link.login_input
     border-radius: 2%;
     box-shadow:0 1px 4px rgba(0, 0, 0, .3), -19px 0 10px -22px rgba(0, 0, 0, .8), 22px 0 10px -23px rgba(0, 0, 0, .8), 0 0 40px rgba(0, 0, 0, .1) inset;
     position: relative;
-    max-height:600px;
-    max-width:700px;
+    max-width: 100%;
+    max-height: 100%;
 }
 /*Внешний вид картинки на персональной ссылке*/
 #upload_image_back:hover

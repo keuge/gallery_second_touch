@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="styles.css">
-<script src="/project/functions/jquery-2.1.3.js"></script>
+<script src="/project/sky_request/gallery/functions/jquery-2.1.3.js"></script>
 </head>
 <body>
 <?php
@@ -41,7 +41,7 @@ if (isset($_POST['login']) OR isset($_POST['password']))
     $login = trim($login);
     $password = trim($password);
 
-    include $_SERVER['DOCUMENT_ROOT'].'/project/functions/dbconnect.php';
+    include  __DIR__.DIRECTORY_SEPARATOR.'/functions/dbconnect.php';
     $sql_check_if_reg_code_null = mysql_query("SELECT register_code FROM users WHERE login='$login'",$link);
     $result = mysql_query("SELECT * FROM users WHERE login='$login' AND register_code is NULL",$link); //извлекаем из базы все данные о пользователе с введенным логином и подтсвержденной почтой
     $myrow = mysql_fetch_array($result);

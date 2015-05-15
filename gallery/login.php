@@ -9,6 +9,7 @@
 session_start();
 if (empty($_SESSION['login'])) //если не авторизованы, то предлагает авторизоваться
 {
+
 ?>
 <div id='login_box'>
 <form  action="login.php" method="post">
@@ -34,6 +35,6 @@ else
 }
 ?>
 <?php
-include 'auth.php';?>
+include __DIR__.DIRECTORY_SEPARATOR.'auth.php';?>
 </body>
 </html>
