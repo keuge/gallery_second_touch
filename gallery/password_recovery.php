@@ -83,5 +83,6 @@ if(!empty($_POST['recovery_login']) AND !empty($_POST['recovery_email']))
     }
 }
 }?>
+
 </body>
 </html>
