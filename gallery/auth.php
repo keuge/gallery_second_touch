@@ -3,11 +3,12 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="styles.css">
-<script src="/project/sky_request/gallery/functions/jquery-2.1.3.js"></script>
+<script src="/mvc_gallery/scripts/jquery-2.1.3.js"></script>
 </head>
 <body>
 <?php
-session_start();
+include  __DIR__.DIRECTORY_SEPARATOR.'/functions/search_errors.php';
+include  __DIR__.DIRECTORY_SEPARATOR.'/protected/config/db.php';
 if (isset($_POST['login']) OR isset($_POST['password']))
 {
     $login = $_POST['login'];
@@ -41,11 +42,10 @@ if (isset($_POST['login']) OR isset($_POST['password']))
     $login = trim($login);
     $password = trim($password);
 
-    include  __DIR__.DIRECTORY_SEPARATOR.'/functions/dbconnect.php';
-    $sql_check_if_reg_code_null = mysql_query("SELECT register_code FROM users WHERE login='$login'",$link);
-    $result = mysql_query("SELECT * FROM users WHERE login='$login' AND register_code is NULL",$link); //извлекаем из базы все данные о пользователе с введенным логином и подтсвержденной почтой
-    $myrow = mysql_fetch_array($result);
-    $check_if_reg_code_null = mysql_fetch_array($sql_check_if_reg_code_null);
+    $sql_check_if_reg_code_null = mysqli_query($link,"SELECT register_code FROM users WHERE login='$login'");
+    $result = mysqli_query($link,"SELECT * FROM users WHERE login='$login' AND register_code is NULL"); //извлекаем из базы все данные о пользователе с введенным логином и подтсвержденной почтой
+    $myrow = mysqli_fetch_array($result);
+    $check_if_reg_code_null = mysqli_fetch_array($sql_check_if_reg_code_null);
     if($myrow['password'] !== $password)
     {
         echo '<br><div  class="auth_alert" >Пароль или логин неправильный!<br><br><br></div>';
@@ -57,7 +57,7 @@ if (isset($_POST['login']) OR isset($_POST['password']))
             $_SESSION['login']=$myrow['login'];
             $_SESSION['id']=$myrow['id'];
 //            echo "Вы зайшли на сайт! <a href='index.php'>Главная страница</a>";
-            echo '<meta http-equiv="Refresh" content="0; url=http://f7u12.ru/project/sky_request/gallery/">';
+            echo '<meta http-equiv="Refresh" content="0; url=http://f7u12.ru/mvc_gallery/">';
         }
         else
         {

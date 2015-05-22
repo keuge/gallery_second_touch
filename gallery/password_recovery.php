@@ -6,7 +6,9 @@
 </head>
 <body id="background">
 <?php
-include  __DIR__.DIRECTORY_SEPARATOR.'/functions/dbconnect.php';
+session_start();
+include  __DIR__.DIRECTORY_SEPARATOR.'/protected/config/db.php';
+include  __DIR__.DIRECTORY_SEPARATOR.'/functions/search_errors.php';
 if(!empty($_GET['recovery_login_confirm']))
 {
     ?>
@@ -31,7 +33,7 @@ if(!empty($_GET['recovery_login_confirm']))
         $do_sql_password_change = mysql_query($sql_password_change, $link) or die(mysql_error());
         ?>
 <div class='email_changed'>Пароль изменен.</div>
-        <div class='email_recover' ><meta http-equiv="Refresh" content="5; url=http://f7u12.ru/project/sky_request/gallery/">Страница перезагрузится через 5 секунд.</div>
+        <div class='email_recover' ><meta http-equiv="Refresh" content="5; url=http://f7u12.ru/mvc_gallery/">Страница перезагрузится через 5 секунд.</div>
         <?php
     }
 }
@@ -49,26 +51,27 @@ else
     <div  id='back_to_index_from_recovery_box'><a href="index.php">Назад</a></div>
         </div>
 <?php
-$login_to_recover = $_POST['recovery_login'];
-$email_to_recover = $_POST['recovery_email'];
-$sql_recover_user_password = "SELECT * FROM users WHERE login='$login_to_recover'";
-$do_sql_recover_user_password = mysql_query($sql_recover_user_password, $link) or die(mysql_error());
-$show_sql_recover_user_password = mysql_fetch_array($do_sql_recover_user_password);
-if(!empty($_POST['recovery_login']) AND !empty($_POST['recovery_email']))
-{
-    $reset_password_code = md5(uniqid(rand()));
-    $sql_update_user_data = 'UPDATE users SET reset_password="'.$reset_password_code.'" WHERE login="'.$login_to_recover.'"';
-    $do_update_user_data = mysql_query($sql_update_user_data);
-    if($_POST['recovery_login'] == $show_sql_recover_user_password['login'] AND $_POST['recovery_email'] == $show_sql_recover_user_password['email'])
+    if(!empty($_POST['recovery_login']) AND !empty ($_POST['recovery_email']))
+    {
+
+        $login_to_recover = $_POST['recovery_login'];
+        $email_to_recover = $_POST['recovery_email'];
+        $sql_recover_user_password = "SELECT * FROM users WHERE login='$login_to_recover'";
+        $do_sql_recover_user_password = mysql_query($sql_recover_user_password, $link) or die(mysql_error());
+        $show_sql_recover_user_password = mysql_fetch_array($do_sql_recover_user_password);
+        $reset_password_code = md5(uniqid(rand()));
+        $sql_update_user_data = 'UPDATE users SET reset_password="'.$reset_password_code.'" WHERE login="'.$login_to_recover.'"';
+        $do_update_user_data = mysql_query($sql_update_user_data);
+        if($_POST['recovery_login'] == $show_sql_recover_user_password['login'] AND $_POST['recovery_email'] == $show_sql_recover_user_password['email'])
     {
         $to = $email_to_recover;
         $subject = "Восстановление доступа к учетной записи $login_to_recover";
-        $header = "http://f7u12.ru/project/sky_request/gallery/index.php восстанвление доступа к учетной записи.";
-        $message = "http://f7u12.ru/project/sky_request/gallery/password_recovery.php?recovery_login_confirm=$reset_password_code";
+        $header = "http://f7u12.ru/mvc_gallery/index.php восстанвление доступа к учетной записи.";
+        $message = "http://f7u12.ru/mvc_gallery/password_recovery.php?recovery_login_confirm=$reset_password_code";
         $sendmail = mail($to,$subject,$message,$header);
         ?>
         <div class='email_recover'>Если вы указали правильные данные, то вам на почту выслана ссылка для создания нового пароля.</div>
-        <div class='email_recover' ><meta http-equiv="Refresh" content="5; url=http://f7u12.ru/project/sky_request/gallery/">Страница перезагрузится через 5 секунд.</div>
+        <div class='email_recover' ><meta http-equiv="Refresh" content="5; url=http://f7u12.ru/mvc_gallery/">Страница перезагрузится через 5 секунд.</div>
         <?php
         ?>
     <?php
@@ -77,12 +80,11 @@ if(!empty($_POST['recovery_login']) AND !empty($_POST['recovery_email']))
     {
         ?>
         <div class='email_recover'>Если вы указали правильные данные, то вам на почту выслана ссылка для создания нового пароля.</div>
-<div class='email_recover'><meta http-equiv="Refresh" content="5; url=http://f7u12.ru/project/sky_request/gallery/">Страница перезагрузится через 5 секунд.</div>
+<div class='email_recover'><meta http-equiv="Refresh" content="5; url=http://f7u12.ru/mvc_gallery/">Страница перезагрузится через 5 секунд.</div>
 <?php
 
     }
 }
 }?>
-
 </body>
 </html>

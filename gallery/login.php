@@ -7,8 +7,11 @@
 <body id="background">
 <?php
 session_start();
+include  __DIR__.DIRECTORY_SEPARATOR.'/functions/search_errors.php';
+include  __DIR__.DIRECTORY_SEPARATOR.'/protected/config/db.php';
 if (empty($_SESSION['login'])) //если не авторизованы, то предлагает авторизоваться
 {
+
 ?>
 <div id='login_box'>
 <form  action="login.php" method="post">
@@ -30,7 +33,7 @@ if (empty($_SESSION['login'])) //если не авторизованы, то п
 }
 else
 {
-    echo '<meta http-equiv="Refresh" content="0; url=http://f7u12.ru/project/sky_request/gallery/">';
+    echo '<meta http-equiv="Refresh" content="0; url=http://f7u12.ru/mvc_gallery/">';
 }
 ?>
 <?php

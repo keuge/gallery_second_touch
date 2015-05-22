@@ -7,11 +7,14 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
     <?php
     session_start();
-include  __DIR__.DIRECTORY_SEPARATOR.'/functions/dbconnect.php';
+    include  __DIR__.DIRECTORY_SEPARATOR.'/functions/search_errors.php';
+    include  __DIR__.DIRECTORY_SEPARATOR.'/protected/config/db.php';
     ?>
 </head>
 <body id="background">
 <?php
+ini_set('display_errors',1);
+error_reporting(E_ALL);
 // Проверяем, авторизованы ли мы
 if (empty($_SESSION['login']) or empty($_SESSION['id'])) //если нет, то выводим меню, доступное для незарегистрированных пользователей
 {

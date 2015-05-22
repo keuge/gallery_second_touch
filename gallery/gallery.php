@@ -2,8 +2,8 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <script src="/project/sky_request/gallery/functions/jquery-2.1.3.js"></script>
-    <script src="/project/sky_request/gallery/functions/jquery.fakecrop.js"></script>
+    <script src="/mvc_gallery/scripts/jquery-2.1.3.js"></script>
+    <script src="/mvc_gallery/scripts/jquery.fakecrop.js"></script>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <!--    Красиво заворачивает картинки-->
     <script>
@@ -16,7 +16,7 @@
     <script>
         function confirmDelete()
         {
-            return ($(confirm("Точно удалить?")))
+            return ((confirm("Точно удалить?")))
         }
     </script>
     <!--    Подтверждение удаления картинки-->
@@ -24,9 +24,8 @@
 <body>
 <?php
 session_start();
-include  __DIR__.DIRECTORY_SEPARATOR.'/functions/dbconnect.php';
-ini_set('display_errors',1);
-error_reporting();
+include  __DIR__.DIRECTORY_SEPARATOR.'/functions/search_errors.php';
+include  __DIR__.DIRECTORY_SEPARATOR.'/protected/config/db.php';
 ?>
 <a id="gallery_index_link" class='verdana' href="index.php">&#8610;</a>
 <div id="width_hundred_percent">
@@ -47,7 +46,7 @@ error_reporting();
 <div id="width_hundred_percent">
     <div id="form_search_picture_category">
         <meta charset="utf-8">
-        <form method="get" action="gallery.php">
+        <form method="get" action="">
             <input id="input_search_picture_category" type="text" name="search_category" placeholder="Из какой категории картинку ищем?" size="40" >
             <input id="upload_image"  type="submit" value="Искать"/>
         </form>
@@ -59,7 +58,7 @@ error_reporting();
 <?php
 if (empty($_SESSION['login']) or empty($_SESSION['id'])) //если не зареганы, то предлагаем зарегаться
 {
-    header("Location: http://f7u12.ru/project/sky_request/gallery/");
+    header("Location: http://f7u12.ru/mvc_gallery/");
 }
 else
 {
@@ -78,14 +77,10 @@ if (isset($_FILES['uploadfile']['name']))
     $imgcat = $_POST['category'];
     if (move_uploaded_file($_FILES['uploadfile']['tmp_name'], $fot))
     {
-        $res= mysql_query
-        (
-            "INSERT INTO images (name, description, img_url, size, mime, category) VALUES ('".$imgname."', '".$imgdesc."','".$fot."','".$imgsize."','".$imgtype."','".$imgcat."');"
-        );
-        $res2= mysql_query
-        (
-            "INSERT INTO categories (category) VALUES ('".$imgcat."');"
-        );
+        $image = "INSERT INTO images (name, description, img_url, size, mime, category) VALUES ('".$imgname."', '".$imgdesc."','".$fot."','".$imgsize."','".$imgtype."','".$imgcat."');";
+        $res= mysqli_query($link,$image);
+        $image2 = "INSERT INTO categories (category) VALUES ('".$imgcat."');";
+        $res2= mysqli_query($link, $image2);
         if($res AND $res2)
         {
            ?> <div class='upload_success'></div><?php
@@ -95,14 +90,15 @@ if (isset($_FILES['uploadfile']['name']))
 <!--Загрузка картинки в базу и папку-->
 <!--Вывод всех категорий в галерее-->
 <div class="categories">
-    <a href="/project/sky_request/gallery/gallery.php">All</a>
+    <a href="/mvc_gallery/gallery.php">All</a>
+
     <?php
     $select_categories = "SELECT DISTINCT category FROM images";
-    $all_categories = mysql_query($select_categories);
-    while($category = mysql_fetch_array($all_categories))
+    $all_categories = mysqli_query($link,$select_categories);
+    while($category = mysqli_fetch_array($all_categories))
     {
     ?>
-   <a href="/project/sky_request/gallery/gallery.php?category=<?php echo $category['category'];?>"><?php echo $category['category'];?></a>
+   <a href="/mvc_gallery/gallery.php?category=<?php echo $category['category'];?>"><?php echo $category['category'];?></a>
    <?php }?>
 </div>
 <!--Вывод всех категорий в галерее-->
@@ -110,27 +106,32 @@ if (isset($_FILES['uploadfile']['name']))
 <div class="container">
 <br><br>
 <?php
-if(!empty ($_GET['search_category']))
+if(!empty($_GET['search_category']))
 {
-$sql= "SELECT img_url, id FROM `images` WHERE `category`
-    LIKE '%".$_GET['search_category']."%'";
+//    print_r($_GET['search_category']);
+    $sql= 'SELECT img_url, id FROM images WHERE category="'.$_GET['search_category'].'"';
+//    echo 1;
 }
 elseif (!empty($_GET['category']))
 {
     $sql= 'SELECT img_url, id FROM images WHERE category="'.$_GET['category'].'"';
+//    echo 2;
 }
 else
 {
     $sql= 'SELECT img_url, id FROM images ';
+//    echo 3;
 //Выбираем все картинки
 }
-            $result = mysql_query($sql);
-            while($row = mysql_fetch_array($result))
+            $result = mysqli_query($link,$sql);
+            while($row = mysqli_fetch_array($result))
 {
+//print_r($row);
+//echo '<br>';
             $_POST['img_url'] = $row['img_url'];
             $_POST['id'] = $row['id'];
 ?>
-            <a href="/project/sky_request/gallery/image_form.php?photo_id=<?php echo $_POST['id'];?>"><img src="<?php echo $_POST['img_url']?>"/> <!-- отображаем картинку на экран и добавляем путь на персанальную страницу для картинки -->
+            <a href="/mvc_gallery/image_form.php?photo_id=<?php echo $_POST['id'];?>"><img src="<?php echo $_POST['img_url']?>"/> <!-- отображаем картинку на экран и добавляем путь на персанальную страницу для картинки -->
                 <form method="POST" enctype="multipart/form-data" >  <!-- форма для удаления картинки -->
                     <input type="hidden" value="<?php echo $_POST['img_url'];?>" name="delete_file" /> <!-- скрытое значение, которое укажет путь для удаления картинки из папки -->
                     <input type="hidden" value="<?php echo $_POST['id'];?>" name="delete_db_file" /> <!-- скрытое значение, которое укажет путь для удаления картинки из базы -->
@@ -151,8 +152,8 @@ if (array_key_exists('delete_file', $_POST) AND array_key_exists('delete_db_file
     {
         unlink($image_file_path);
         $deletefrombase = 'DELETE FROM images WHERE id="'.$id_image_from_db.'"';
-        $dosql = mysql_query($deletefrombase);
-        echo '<meta http-equiv="Refresh" content="0; url=http://f7u12.ru/project/sky_request/gallery/gallery.php">';
+        $dosql = mysqli_query($link,$deletefrombase);
+        echo '<meta http-equiv="Refresh" content="0; url=http://f7u12.ru/mvc_gallery/gallery.php">';
     }
     else
     {

@@ -3,13 +3,16 @@
 <head>
     <meta charset="utf-8">
 <link rel="stylesheet" type="text/css" href="styles.css">
-<script src="/project/sky_request/gallery/functions/jquery-2.1.3.js"></script>
+<script src="/mvc_gallery/scripts/jquery-2.1.3.js"></script>
 </head>
 <body id="background">
 <?php
 session_start();
+include  __DIR__.DIRECTORY_SEPARATOR.'/functions/search_errors.php';
+include  __DIR__.DIRECTORY_SEPARATOR.'/protected/config/db.php';
 if (empty($_SESSION['login'])) //если не авторизованы, то предлагает авторизоваться
 {
+
     ?>
 <div id='register_box' >
 
@@ -25,7 +28,6 @@ if (empty($_SESSION['login'])) //если не авторизованы, то п
 </div>
 <br>
 <?php
-    include  __DIR__.DIRECTORY_SEPARATOR.'/functions/dbconnect.php';
     if (isset($_POST['submit']))
     {
         if(isset($_POST['login']))
@@ -98,15 +100,15 @@ if (empty($_SESSION['login'])) //если не авторизованы, то п
         {
             $to = $email;
             $subject = "Подтверждение почты для $login";
-            $header = "http://f7u12.ru/project/sky_request/gallery/index.php подтверждение почты.";
+            $header = "http://f7u12.ru/mvc_gallery/index.php подтверждение почты.";
             $message = "Нажмите на ссылку, чтобы зарегистрироваться ";
-            $message.= "http://f7u12.ru/project/sky_request/gallery/index.php?register_code=$register_code";
+            $message.= "http://f7u12.ru/mvc_gallery/index.php?register_code=$register_code";
             $sendmail = mail($to,$subject,$message,$header);
             if($sendmail)
             {
                 echo '<div class="auth_alert">Вам на почту отправлено письмо с подтверждением!</div>';
 //            echo "<div class='auth_alert'> Все в порядке. Вы зарегистрированы, $login.</div>";
-                echo '<meta http-equiv="Refresh" content="5; url=http://f7u12.ru/project/sky_request/gallery/">';
+                echo '<meta http-equiv="Refresh" content="5; url=http://f7u12.ru/mvc_gallery/">';
             }
             else
             {
@@ -122,7 +124,7 @@ if (empty($_SESSION['login'])) //если не авторизованы, то п
 }
 else
 {
-    echo '<meta http-equiv="Refresh" content="0; url=http://f7u12.ru/project/sky_request/gallery/">';
+    echo '<meta http-equiv="Refresh" content="0; url=http://f7u12.ru/mvc_gallery/">';
 }
 ?>
 </body>

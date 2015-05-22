@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="styles.css">
-    <script src="/project/sky_request/gallery/functions/jquery-2.1.3.js"></script>
+    <script src="/mvc_gallery/scripts/jquery-2.1.3.js"></script>
     <script>
         $(document).ready(function() //Скрытие форм редактирования
         {
@@ -30,26 +26,24 @@
             return ((confirm("Точно удалить?")))
         }
     </script>
-</head>
+
 <?php
 session_start();
+include  __DIR__.DIRECTORY_SEPARATOR.'/functions/search_errors.php';
+include  __DIR__.DIRECTORY_SEPARATOR.'/protected/config/db.php';
 if (empty($_SESSION['login']) or empty($_SESSION['id'])) //если не зареганы, то предлагаем зарегаться
 {
-    header("Location: http://f7u12.ru/project/sky_request/gallery/");
+    header("Location: http://f7u12.ru/mvc_gallery/");
 }
 else
 {
-include  __DIR__.DIRECTORY_SEPARATOR.'/functions/dbconnect.php';
-?>
-<!--Запросить из базы все данные о картинке-->
-<?php
 $sql= 'SELECT img_url, id, name, description, category FROM images where id="'.$_GET['photo_id'].'"';
-$result = mysql_query($sql);
-$row = mysql_fetch_array($result); //сохранить в массив все данные о картинке
+$result = mysqli_query($link,$sql);
+$row = mysqli_fetch_array($result); //сохранить в массив все данные о картинке
 ?>
 <!--Запросить из базы все данные о картинке-->
 <!--Вывести на экран кнопки редактирования, отмены-->
-<body>
+
     <div>
 <!--Вывести на экран кнопки редактирования, отмены-->
 <!--Форма удаления картинки-->
@@ -93,8 +87,8 @@ $row = mysql_fetch_array($result); //сохранить в массив все �
             if(isset($_POST['picture_name']) OR isset($_POST['picture_description']) OR isset($_POST['picture_category']))
             {
                 $change_picture_name = 'UPDATE images SET name="'.$_POST['picture_name'].'" , description="'.$_POST['picture_description'].'", category="'.$_POST['picture_category'].'" WHERE id="'.$_GET['photo_id'].'"';
-                mysql_query($change_picture_name);
-                ?> <meta http-equiv="Refresh" content="0; url=http://f7u12.ru/project/sky_request/gallery/image_form.php?photo_id=<?php echo $_GET['photo_id'];?>">
+                mysqli_query($link,$change_picture_name);
+                ?> <meta http-equiv="Refresh" content="0; url=http://f7u12.ru/mvc_gallery/image_form.php?photo_id=<?php echo $_GET['photo_id'];?>">
         <?php
             }
             else
@@ -116,10 +110,10 @@ $row = mysql_fetch_array($result); //сохранить в массив все �
             {
                 echo '<br>';
                 $delete_from_base = 'DELETE FROM images WHERE id="'.$id_image_from_db.'"';
-                mysql_query($delete_from_base);
+                mysqli_query($link,$delete_from_base);
                 unlink($image_file_path);
 
-                echo '<meta http-equiv="Refresh" content="0; url=http://f7u12.ru/project/sky_request/gallery/gallery.php">';
+                echo '<meta http-equiv="Refresh" content="0; url=http://f7u12.ru/mvc_gallery/gallery.php">';
             }
             else
             {
@@ -128,7 +122,4 @@ $row = mysql_fetch_array($result); //сохранить в массив все �
         }
         }
         ?>
-
 <!--Блок удаления картинки закончился////////////////////////////////////////-->
-</body>
-<html>
