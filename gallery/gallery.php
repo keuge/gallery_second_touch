@@ -102,33 +102,23 @@ if (isset($_FILES['uploadfile']['name']))
 <?php
 if(!empty($_GET['search_category']))
 {
-//    print_r($_GET['search_category']);
     $sql= 'SELECT img_url, id FROM images WHERE category="'.$_GET['search_category'].'"';
-//    echo 1;
 }
 elseif (!empty($_GET['category']))
 {
     $sql= 'SELECT img_url, id FROM images WHERE category="'.$_GET['category'].'"';
-//    echo 2;
 }
 else
 {
     $sql= 'SELECT img_url, id FROM images ';
-//    echo 3;
-//Выбираем все картинки
 }
             $result = mysqli_query($link,$sql);
             while($row = mysqli_fetch_array($result))
 {
-//print_r($row);
-//echo '<br>';
-            $_POST['img_url'] = $row['img_url'];
-            $_POST['id'] = $row['id'];
 ?>
-            <a href="image_form.php?photo_id=<?php echo $_POST['id'];?>"><img src="<?php echo $_POST['img_url']?>"/> <!-- отображаем картинку на экран и добавляем путь на персанальную страницу для картинки -->
+            <a href="image_form.php?photo_id=<?php echo $row['id'];?>"><img src="<?php echo $row['img_url']?>"/> <!-- отображаем картинку на экран и добавляем путь на персанальную страницу для картинки -->
                 <form method="POST" enctype="multipart/form-data" >  <!-- форма для удаления картинки -->
-                    <input type="hidden" value="<?php echo $_POST['img_url'];?>" name="delete_file" /> <!-- скрытое значение, которое укажет путь для удаления картинки из папки -->
-                    <input type="hidden" value="<?php echo $_POST['id'];?>" name="delete_db_file" /> <!-- скрытое значение, которое укажет путь для удаления картинки из базы -->
+                    <input type="hidden" value="<?php echo $row['id'];?>" name="delete_db_file" /> <!-- скрытое значение, которое укажет путь для удаления картинки из базы -->
                     <br>
                     <input name="submit" onclick="return confirmDelete();" type="image" src="img/cross_7.png">
                 </form>
@@ -137,24 +127,16 @@ else
 <br>
 <!--    Удаление файла-->
 <?php
-if (array_key_exists('delete_file', $_POST) AND array_key_exists('delete_db_file', $_POST))
+if(!empty($_POST['delete_db_file']))
 {
-    $image_file_path = $_POST['delete_file'];
-    echo '<br>';
-    $id_image_from_db = $_POST['delete_db_file'];
-    echo '<br>';
-    if (file_exists($image_file_path) AND !empty($id_image_from_db))
-    {
-        unlink($image_file_path);
-        $deletefrombase = 'DELETE FROM images WHERE id="'.$id_image_from_db.'"';
-        $dosql = mysqli_query($link,$deletefrombase);
-        echo '<meta http-equiv="Refresh" content="0; url=http://f7u12.ru/gallery.php">';
-    }
-    else
-    {
-        echo '<br>Не удалилось' . '<br><br>';
-        print_r($_POST);
-    }
+    $delete_image_sql = 'SELECT * FROM images WHERE id="'.$_POST['delete_db_file'].'"';
+    $delete_image_query = mysqli_query($link,$delete_image_sql);
+    $delete_image_array = mysqli_fetch_array($delete_image_query);
+    print_r($delete_image_array);
+    unlink($delete_image_array['img_url']);
+    $deleteFromBase = 'DELETE FROM images WHERE id="'.$delete_image_array['id'].'"';
+    $dosql = mysqli_query($link, $deleteFromBase);
+    echo '<meta http-equiv="Refresh" content="0; url=http://f7u12.ru/gallery.php">';
 }
 }
 ?>

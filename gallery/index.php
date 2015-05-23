@@ -55,4 +55,4 @@ if (empty($_SESSION['login']) or empty($_SESSION['id'])) //если нет, то
     ?>
 </div>
 </body>
-</html>main_page/main_page.php';
+</html>
