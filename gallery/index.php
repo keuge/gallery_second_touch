@@ -20,10 +20,10 @@ if (empty($_SESSION['login']) or empty($_SESSION['id'])) //если нет, то
 {
 ?>
 <div>
-<div class="menu_box" id='register_login_box'>
-<a href='reg.php'>Регистрация</a>
-<a href='login.php'>Вход</a>
-    <br>
+    <div class="menu_box" id='register_login_box'>
+        <a href='reg.php'>Регистрация</a>
+        <a href='login.php'>Вход</a>
+        <br>
     </div>
     <?php
     if($_GET['register_code'] !== NULL)
@@ -40,19 +40,19 @@ if (empty($_SESSION['login']) or empty($_SESSION['id'])) //если нет, то
     <?php
     }
     ?>
-<?php
-}
-else //если зареганы, то показываем меню
-{
-?>
-<div class="auth_box" id='gallery_exit_box'>
+    <?php
+    }
+    else //если зареганы, то показываем меню
+    {
+        ?>
+        <div class="auth_box" id='gallery_exit_box'>
             <a href="gallery.php">Галерея</a>
             <a href="exit.php">Выйти</a>
+        </div>
+        <?php
+        echo " <div class='hello'>Привет, " . ' ' . $_SESSION['login']. '!<?div><br>';
+    }
+    ?>
 </div>
-<?php
-    echo " <div class='hello'>Привет, " . ' ' . $_SESSION['login']. '!<?div><br>';
-}
-?>
-    </div>
 </body>
-</html>
+</html>main_page/main_page.php';

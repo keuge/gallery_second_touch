@@ -135,6 +135,7 @@ else
                 <?php } ?>
 </div>
 <br>
+<!--    Удаление файла-->
 <?php
 if (array_key_exists('delete_file', $_POST) AND array_key_exists('delete_db_file', $_POST))
 {
@@ -157,6 +158,7 @@ if (array_key_exists('delete_file', $_POST) AND array_key_exists('delete_db_file
 }
 }
 ?>
+<!--    Удаление файла-->
 <!--Вывести на экран изображения из базы и добавить кнопку удалить к каждой картинке-->
 </body>
 </html>
