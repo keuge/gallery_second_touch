@@ -2,8 +2,8 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <script src="/mvc_gallery/scripts/jquery-2.1.3.js"></script>
-    <script src="/mvc_gallery/scripts/jquery.fakecrop.js"></script>
+    <script src="/scripts/jquery-2.1.3.js"></script>
+    <script src="/scripts/jquery.fakecrop.js"></script>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <!--    Красиво заворачивает картинки-->
     <script>
@@ -58,7 +58,7 @@ include  __DIR__.DIRECTORY_SEPARATOR.'/protected/config/db.php';
 <?php
 if (empty($_SESSION['login']) or empty($_SESSION['id'])) //если не зареганы, то предлагаем зарегаться
 {
-    header("Location: http://f7u12.ru/mvc_gallery/");
+    header("Location: http://f7u12.ru/");
 }
 else
 {
@@ -67,7 +67,8 @@ if (isset($_FILES['uploadfile']['name']))
     $uploaddir = 'img/';
     $imgtype = $_FILES['uploadfile']['type'];
     $new_file_name = uniqid();
-    $fot = $uploaddir.$new_file_name.'.'.end(explode('.', $_FILES['uploadfile']['name']));
+    $image_name = explode('.', $_FILES['uploadfile']['name']);
+    $fot = $uploaddir.$new_file_name.'.'.end($image_name);
     $imgsize = $_FILES['uploadfile']['size'];
     ?>
     <br>
@@ -78,19 +79,12 @@ if (isset($_FILES['uploadfile']['name']))
     if (move_uploaded_file($_FILES['uploadfile']['tmp_name'], $fot))
     {
         $image = "INSERT INTO images (name, description, img_url, size, mime, category) VALUES ('".$imgname."', '".$imgdesc."','".$fot."','".$imgsize."','".$imgtype."','".$imgcat."');";
-        $res= mysqli_query($link,$image);
-        $image2 = "INSERT INTO categories (category) VALUES ('".$imgcat."');";
-        $res2= mysqli_query($link, $image2);
-        if($res AND $res2)
-        {
-           ?> <div class='upload_success'></div><?php
-        }
-        else ?> <div class='upload_success'>Путь не добавлен в базу данных, но файл загружен</div><?php
+        $res= mysqli_query($link, $image) or die ('Could not connect: '.mysqli_error($link));
     }}?>
 <!--Загрузка картинки в базу и папку-->
 <!--Вывод всех категорий в галерее-->
 <div class="categories">
-    <a href="/mvc_gallery/gallery.php">All</a>
+    <a href="gallery.php">All</a>
 
     <?php
     $select_categories = "SELECT DISTINCT category FROM images";
@@ -98,7 +92,7 @@ if (isset($_FILES['uploadfile']['name']))
     while($category = mysqli_fetch_array($all_categories))
     {
     ?>
-   <a href="/mvc_gallery/gallery.php?category=<?php echo $category['category'];?>"><?php echo $category['category'];?></a>
+   <a href="gallery.php?category=<?php echo $category['category'];?>"><?php echo $category['category'];?></a>
    <?php }?>
 </div>
 <!--Вывод всех категорий в галерее-->
@@ -131,7 +125,7 @@ else
             $_POST['img_url'] = $row['img_url'];
             $_POST['id'] = $row['id'];
 ?>
-            <a href="/mvc_gallery/image_form.php?photo_id=<?php echo $_POST['id'];?>"><img src="<?php echo $_POST['img_url']?>"/> <!-- отображаем картинку на экран и добавляем путь на персанальную страницу для картинки -->
+            <a href="image_form.php?photo_id=<?php echo $_POST['id'];?>"><img src="<?php echo $_POST['img_url']?>"/> <!-- отображаем картинку на экран и добавляем путь на персанальную страницу для картинки -->
                 <form method="POST" enctype="multipart/form-data" >  <!-- форма для удаления картинки -->
                     <input type="hidden" value="<?php echo $_POST['img_url'];?>" name="delete_file" /> <!-- скрытое значение, которое укажет путь для удаления картинки из папки -->
                     <input type="hidden" value="<?php echo $_POST['id'];?>" name="delete_db_file" /> <!-- скрытое значение, которое укажет путь для удаления картинки из базы -->
@@ -153,7 +147,7 @@ if (array_key_exists('delete_file', $_POST) AND array_key_exists('delete_db_file
         unlink($image_file_path);
         $deletefrombase = 'DELETE FROM images WHERE id="'.$id_image_from_db.'"';
         $dosql = mysqli_query($link,$deletefrombase);
-        echo '<meta http-equiv="Refresh" content="0; url=http://f7u12.ru/mvc_gallery/gallery.php">';
+        echo '<meta http-equiv="Refresh" content="0; url=http://f7u12.ru/gallery.php">';
     }
     else
     {

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="styles.css">
-<script src="/mvc_gallery/scripts/jquery-2.1.3.js"></script>
+<script src="/scripts/jquery-2.1.3.js"></script>
 </head>
 <body>
 <?php
@@ -57,7 +57,7 @@ if (isset($_POST['login']) OR isset($_POST['password']))
             $_SESSION['login']=$myrow['login'];
             $_SESSION['id']=$myrow['id'];
 //            echo "Вы зайшли на сайт! <a href='index.php'>Главная страница</a>";
-            echo '<meta http-equiv="Refresh" content="0; url=http://f7u12.ru/mvc_gallery/">';
+            echo '<meta http-equiv="Refresh" content="0; url=http://f7u12.ru/">';
         }
         else
         {

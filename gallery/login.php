@@ -33,7 +33,7 @@ if (empty($_SESSION['login'])) //если не авторизованы, то п
 }
 else
 {
-    echo '<meta http-equiv="Refresh" content="0; url=http://f7u12.ru/mvc_gallery/">';
+    echo '<meta http-equiv="Refresh" content="0; url=http://f7u12.ru/">';
 }
 ?>
 <?php

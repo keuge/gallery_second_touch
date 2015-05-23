@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
 <link rel="stylesheet" type="text/css" href="styles.css">
-<script src="/mvc_gallery/scripts/jquery-2.1.3.js"></script>
+<script src="/scripts/jquery-2.1.3.js"></script>
 </head>
 <body id="background">
 <?php
@@ -86,29 +86,29 @@ if (empty($_SESSION['login'])) //если не авторизованы, то п
         //шифрование
         $password = md5($password);
         //проверка на существование пользователя
-        $resultlogin = mysql_query("SELECT id FROM users WHERE login='$login'",$link);
-        $checklogin = mysql_fetch_array($resultlogin);
-        $resultemail = mysql_query("SELECT id FROM users WHERE email='$email'",$link);
-        $checkemail = mysql_fetch_array($resultemail);
+        $resultlogin = mysqli_query($link, "SELECT id FROM users WHERE login='$login'");
+        $checklogin = mysqli_fetch_array($resultlogin);
+        $resultemail = mysqli_query($link, "SELECT id FROM users WHERE email='$email'");
+        $checkemail = mysqli_fetch_array($resultemail);
         if (!empty($checklogin['id']) OR !empty($checkemail['id']))
         {
             exit("<div class='auth_alert'> Такая почта или логин уже есть.</div>");
         }
         //если нету логина такого, то создаем нового пользователя
-        $result2 = mysql_query("INSERT INTO users (login, email, password, register_code) VALUES('$login','$email','$password','$register_code')");
+        $result2 = mysqli_query($link, "INSERT INTO users (login, email, password, register_code) VALUES('$login','$email','$password','$register_code')");
         if($result2 == 'TRUE')
         {
             $to = $email;
             $subject = "Подтверждение почты для $login";
-            $header = "http://f7u12.ru/mvc_gallery/index.php подтверждение почты.";
+            $header = "http://f7u12.ru подтверждение почты.";
             $message = "Нажмите на ссылку, чтобы зарегистрироваться ";
-            $message.= "http://f7u12.ru/mvc_gallery/index.php?register_code=$register_code";
+            $message.= "http://f7u12.ru/index.php?register_code=$register_code";
             $sendmail = mail($to,$subject,$message,$header);
             if($sendmail)
             {
                 echo '<div class="auth_alert">Вам на почту отправлено письмо с подтверждением!</div>';
 //            echo "<div class='auth_alert'> Все в порядке. Вы зарегистрированы, $login.</div>";
-                echo '<meta http-equiv="Refresh" content="5; url=http://f7u12.ru/mvc_gallery/">';
+                echo '<meta http-equiv="Refresh" content="5; url=http://f7u12.ru/">';
             }
             else
             {
@@ -124,7 +124,7 @@ if (empty($_SESSION['login'])) //если не авторизованы, то п
 }
 else
 {
-    echo '<meta http-equiv="Refresh" content="0; url=http://f7u12.ru/mvc_gallery/">';
+    echo '<meta http-equiv="Refresh" content="0; url=http://f7u12.ru/">';
 }
 ?>
 </body>

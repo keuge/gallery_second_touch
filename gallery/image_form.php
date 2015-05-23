@@ -1,5 +1,5 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
-    <script src="/mvc_gallery/scripts/jquery-2.1.3.js"></script>
+    <script src="/scripts/jquery-2.1.3.js"></script>
     <script>
         $(document).ready(function() //Скрытие форм редактирования
         {
@@ -33,7 +33,7 @@ include  __DIR__.DIRECTORY_SEPARATOR.'/functions/search_errors.php';
 include  __DIR__.DIRECTORY_SEPARATOR.'/protected/config/db.php';
 if (empty($_SESSION['login']) or empty($_SESSION['id'])) //если не зареганы, то предлагаем зарегаться
 {
-    header("Location: http://f7u12.ru/mvc_gallery/");
+    header("Location: http://f7u12.ru/");
 }
 else
 {
@@ -88,7 +88,7 @@ $row = mysqli_fetch_array($result); //сохранить в массив все 
             {
                 $change_picture_name = 'UPDATE images SET name="'.$_POST['picture_name'].'" , description="'.$_POST['picture_description'].'", category="'.$_POST['picture_category'].'" WHERE id="'.$_GET['photo_id'].'"';
                 mysqli_query($link,$change_picture_name);
-                ?> <meta http-equiv="Refresh" content="0; url=http://f7u12.ru/mvc_gallery/image_form.php?photo_id=<?php echo $_GET['photo_id'];?>">
+                ?> <meta http-equiv="Refresh" content="0; url=http://f7u12.ru/image_form.php?photo_id=<?php echo $_GET['photo_id'];?>">
         <?php
             }
             else
@@ -113,7 +113,7 @@ $row = mysqli_fetch_array($result); //сохранить в массив все 
                 mysqli_query($link,$delete_from_base);
                 unlink($image_file_path);
 
-                echo '<meta http-equiv="Refresh" content="0; url=http://f7u12.ru/mvc_gallery/gallery.php">';
+                echo '<meta http-equiv="Refresh" content="0; url=http://f7u12.ru/gallery.php">';
             }
             else
             {
