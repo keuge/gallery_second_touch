@@ -132,11 +132,10 @@ if(!empty($_POST['delete_db_file']))
     $delete_image_sql = 'SELECT * FROM images WHERE id="'.$_POST['delete_db_file'].'"';
     $delete_image_query = mysqli_query($link,$delete_image_sql);
     $delete_image_array = mysqli_fetch_array($delete_image_query);
-    print_r($delete_image_array);
     unlink($delete_image_array['img_url']);
     $deleteFromBase = 'DELETE FROM images WHERE id="'.$delete_image_array['id'].'"';
     $dosql = mysqli_query($link, $deleteFromBase);
-    echo '<meta http-equiv="Refresh" content="0; url=http://f7u12.ru/gallery.php">';
+    header("Location: http://f7u12.ru/gallery.php");
 }
 }
 ?>

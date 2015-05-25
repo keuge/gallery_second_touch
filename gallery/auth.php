@@ -57,7 +57,7 @@ if (isset($_POST['login']) OR isset($_POST['password']))
             $_SESSION['login']=$myrow['login'];
             $_SESSION['id']=$myrow['id'];
 //            echo "Вы зайшли на сайт! <a href='index.php'>Главная страница</a>";
-            echo '<meta http-equiv="Refresh" content="0; url=http://f7u12.ru/">';
+            header("Location: http://f7u12.ru/gallery.php");
         }
         else
         {
