@@ -1,0 +1,15 @@
+RewriteEngine on
+# Change yourdomain.com to be your primary domain.
+
+RewriteCond %{HTTP_HOST} ^(www.)?f7u12.ru$
+
+RewriteCond %{REQUEST_URI} !^/yii/
+
+# Don't change this line.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^(.*)$ /yii/$1
+
+RewriteCond %{HTTP_HOST} ^(www.)?f7u12.ru$
+RewriteRule ^(/)?$ yii/web/index.php [L]
