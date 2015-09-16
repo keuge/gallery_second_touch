@@ -1,8 +1,6 @@
 <?php
 
-$questions = file_get_contents("files/questions.txt");
-$questions =  explode("\n",$questions);
-
+$questions = file("files/questions.txt");
 
 foreach($questions as $key => $arrayQuestion)
 {
@@ -82,7 +80,7 @@ elseif(!empty($_SESSION['currentPage']))
         ?>
     <!--    <input type="hidden" name="currentPage" value="1">-->
         <?php
-        if($toQuestion == 3)
+        if($toQuestion <= 3)
         {
             ?>
             <input name="nextPage" class="btn btn-warning" type="submit" value="Следующая страница" ><br><br>

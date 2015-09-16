@@ -9,12 +9,27 @@
     <br>
     <?php
     session_start();
-    include_once __DIR__ . DIRECTORY_SEPARATOR . 'show_quiz.php';
-    include_once __DIR__ . DIRECTORY_SEPARATOR . 'send_answers.php';
+    include_once __DIR__ . DIRECTORY_SEPARATOR . 'model/arrayQuestions.php';
+    include_once __DIR__ . DIRECTORY_SEPARATOR . 'model/QA.php';
+    include_once __DIR__ . DIRECTORY_SEPARATOR . 'view/QAForm.php';
 
-//          file_put_contents("$sessionId.doc",$questionAnswer);
 
-//        mail_attachment("$sessionId.doc", "/", "keugere@gmail.com", "keugere@gmail.com", "$sessionId", "keugere@gmail.com", "Сообщение от $sessionId", "$sessionAnswer");
+
+    $makeArrayQuestions = new ArrayQuestionsComponent();
+    $makeArrayQuestions->getQuestionsFromFileToArray('files/questions.txt');
+    $keys = $makeArrayQuestions->keys;
+
+    $_SESSION['currentPage'] = 1;
+    $genQA = new QA();
+    $genQA->getQA($_SESSION['currentPage'],$_GET['currentPage'], $_GET['previousPage'], $_GET['nextPage'], $keys);
+
+    $showQAForm = new QAForm();
+
+
+    $array;
+    $someViewClassObject->renderQuestionForm($array);
+
+//    $showQAForm->getQAForm($makeArrayQuestions, );
 
     ?>
 </div>

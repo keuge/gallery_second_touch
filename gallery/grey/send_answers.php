@@ -1,5 +1,6 @@
 <?php
-function mail_attachment($filename, $path, $mailto, $from_mail, $from_name, $replyto, $subject, $message) {
+function mail_attachment($filename, $path, $mailto, $from_mail, $from_name, $replyto, $subject, $message)
+{
     $file = $path.$filename;
     $file_size = filesize($file);
     $handle = fopen($file, "rb");
@@ -28,7 +29,12 @@ function mail_attachment($filename, $path, $mailto, $from_mail, $from_name, $rep
     } else {
         echo "mail send ... ERROR!";
     }
+
 }
+
+//file_put_contents("$sessionId.doc",$questionAnswer);
+//mail_attachment("$sessionId.doc", "/", "keugere@gmail.com", "keugere@gmail.com", "$sessionId", "keugere@gmail.com", "Сообщение от $sessionId", "$sessionAnswer");
+
 
 //$file = ""; //File here (eg test.docx)
 //$path = ""; //Path to file here (eg documents/)
