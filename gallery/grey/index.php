@@ -1,6 +1,7 @@
 <!doctype html>
 <link rel="stylesheet" href="css/bootstrap.css">
-<link rel="stylesheet" href="../scripts/jquery-2.1.3.js">
+<script src="../scripts/jquery-2.1.3.js"></script>
+<script src="js/parsley.js"></script>
 <body class="full">
 <div class="grey-fox questions-form-background">
     <br><br>
@@ -9,12 +10,22 @@
     <br>
     <?php
     session_start();
-    include_once __DIR__ . DIRECTORY_SEPARATOR . 'show_quiz.php';
-    include_once __DIR__ . DIRECTORY_SEPARATOR . 'send_answers.php';
+    include_once __DIR__ . DIRECTORY_SEPARATOR . 'model/ArrayQuestionsComponent.php';
+    include_once __DIR__ . DIRECTORY_SEPARATOR . 'model/Pages.php';
+    include_once __DIR__ . DIRECTORY_SEPARATOR . 'view/QAForm.php';
+    include_once __DIR__ . DIRECTORY_SEPARATOR . 'model/Answers.php';
 
-//          file_put_contents("$sessionId.doc",$questionAnswer);
+    $questionsArrayMaker = new ArrayQuestionsComponent();
+    $questionsArray = $questionsArrayMaker->getQuestionsFromFileToArray('files/questions.txt');
 
-//        mail_attachment("$sessionId.doc", "/", "keugere@gmail.com", "keugere@gmail.com", "$sessionId", "keugere@gmail.com", "Сообщение от $sessionId", "$sessionAnswer");
+    $currentPageArrayQuestionsGetter = new Pages();
+    $currentPageArrayQuestions = $currentPageArrayQuestionsGetter->getCurrentPageQuestions($questionsArray);
+
+    $QAFormRenderer = new QAForm();
+    $QAFormRenderer->renderQuestionForm($currentPageArrayQuestions);
+
+    $answersSessionGetter = new Answers();
+    $answersSessionGetter->getAnswers($questionsArray);
 
     ?>
 </div>

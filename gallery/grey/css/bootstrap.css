@@ -5,7 +5,7 @@
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 .full {
-    background: url(http://i.imgur.com/u4USN70.jpg) no-repeat center center fixed;
+    background: url(../img/u4USN70.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -1432,7 +1432,7 @@ a.bg-danger:focus {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: -17px;
+    margin-bottom: 4px;
 }
 .questions-form-background
 {
@@ -6847,3 +6847,9 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+
+
+.BF_Buttons
+{
+    margin-top: 44px;
+}
