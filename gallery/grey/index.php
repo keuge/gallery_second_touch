@@ -1,6 +1,7 @@
 <!doctype html>
 <link rel="stylesheet" href="css/bootstrap.css">
-<link rel="stylesheet" href="../scripts/jquery-2.1.3.js">
+<script src="../scripts/jquery-2.1.3.js"></script>
+<script src="js/parsley.js"></script>
 <body class="full">
 <div class="grey-fox questions-form-background">
     <br><br>
@@ -9,27 +10,22 @@
     <br>
     <?php
     session_start();
-    include_once __DIR__ . DIRECTORY_SEPARATOR . 'model/arrayQuestions.php';
-    include_once __DIR__ . DIRECTORY_SEPARATOR . 'model/QA.php';
+    include_once __DIR__ . DIRECTORY_SEPARATOR . 'model/ArrayQuestionsComponent.php';
+    include_once __DIR__ . DIRECTORY_SEPARATOR . 'model/Pages.php';
     include_once __DIR__ . DIRECTORY_SEPARATOR . 'view/QAForm.php';
+    include_once __DIR__ . DIRECTORY_SEPARATOR . 'model/Answers.php';
 
+    $questionsArrayMaker = new ArrayQuestionsComponent();
+    $questionsArray = $questionsArrayMaker->getQuestionsFromFileToArray('files/questions.txt');
 
+    $currentPageArrayQuestionsGetter = new Pages();
+    $currentPageArrayQuestions = $currentPageArrayQuestionsGetter->getCurrentPageQuestions($questionsArray);
 
-    $makeArrayQuestions = new ArrayQuestionsComponent();
-    $makeArrayQuestions->getQuestionsFromFileToArray('files/questions.txt');
-    $keys = $makeArrayQuestions->keys;
+    $QAFormRenderer = new QAForm();
+    $QAFormRenderer->renderQuestionForm($currentPageArrayQuestions);
 
-    $_SESSION['currentPage'] = 1;
-    $genQA = new QA();
-    $genQA->getQA($_SESSION['currentPage'],$_GET['currentPage'], $_GET['previousPage'], $_GET['nextPage'], $keys);
-
-    $showQAForm = new QAForm();
-
-
-    $array;
-    $someViewClassObject->renderQuestionForm($array);
-
-//    $showQAForm->getQAForm($makeArrayQuestions, );
+    $answersSessionGetter = new Answers();
+    $answersSessionGetter->getAnswers($questionsArray);
 
     ?>
 </div>

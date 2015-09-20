@@ -12,7 +12,6 @@ $keyAndQuestion = array_combine($keys, $arrayQuestions);
 $sessionId = session_id();
 $countKeys = count($keys);
 
-
 if(empty($_SESSION['currentPage']) || !isset($_SESSION['currentPage']) || $_SESSION['currentPage'] <= 0)
 {
    $_SESSION['currentPage'] = 1;
@@ -52,13 +51,7 @@ elseif(!empty($_SESSION['currentPage']))
     {
         $sessionAnswer[$answer] = $_SESSION["$answer"];
     }
-
-
     ?>
-
-<!--$this->render('views/form', array('arrayQuestions'=>$arrayQuestions))-->
-
-
     <form name="questionForm" action="index.php" method="get">
         <div class="question-block">
             <div class="question">
@@ -78,7 +71,6 @@ elseif(!empty($_SESSION['currentPage']))
         }
         }
         ?>
-    <!--    <input type="hidden" name="currentPage" value="1">-->
         <?php
         if($toQuestion <= 3)
         {
@@ -98,4 +90,3 @@ elseif(!empty($_SESSION['currentPage']))
 <br />
 </form>
 <br />
-<!--ob_start()     ob_end() ob_flush()-->
