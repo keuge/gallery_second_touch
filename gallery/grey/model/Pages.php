@@ -5,11 +5,10 @@ class Pages
 {
     public function getCurrentPageQuestions($questionsArray)
     {
-
         $questionsArrayOnPage = NULL;
         //считаем, сколько всего есть вопросов и страниц
         $allQuestions = count($questionsArray);
-        $allPages = (integer)($allQuestions/4);
+        $pagesCount = $_SESSION['pagesCount'] = (integer)($allQuestions/4);
 
         $_SESSION['currentPage'];
         //если номер текущей страницы не определен, то ставим текущую страницу 1
@@ -23,7 +22,7 @@ class Pages
             $_SESSION['currentPage'] = $_POST['currentPage'];
         }
         //если была нажата кнопка "текущая страница и номер страницы не больше номера последней страницы, то передвигаемся на одну страницу вперед
-        if(!empty($_POST['nextPage']) && $_SESSION['currentPage'] <= $allPages)
+        if(!empty($_POST['nextPage']) && $_SESSION['currentPage'] <= $pagesCount || !empty($_POST['submitAnswers']))
         {
             //записываем ответы в сессию
             for($i=1; $i<=$allQuestions; $i++)
@@ -32,8 +31,15 @@ class Pages
                 {
                     $_SESSION["answer_$i"] = $_POST["answer_$i"];
                 }
+                elseif($_SESSION["answer_$i"] == '')
+                {
+                    $_SESSION["answer_$i"] = NULL;
+                }
             }
             $_SESSION['currentPage'] = $_SESSION['currentPage'] + 1;
+            $_SESSION['percentQuestion'] = (integer)(($_SESSION['currentPage']/($pagesCount+1)) * 100);
+
+
         }
         //если нажата кнопка "предыдущая страница" и номер страница больше 1, то передвигаемся на одну страницу назад
         elseif(!empty($_POST['previousPage']) && $_SESSION['currentPage'] >= 2)
@@ -45,10 +51,16 @@ class Pages
                 {
                     $_SESSION["answer_$i"] = $_POST["answer_$i"];
                 }
+                elseif($_SESSION["answer_$i"] == '')
+                {
+                    $_SESSION["answer_$i"] = NULL;
+                }
             }
             $_SESSION['currentPage'] = $_SESSION['currentPage'] - 1;
+            $_SESSION['percentQuestion'] = (integer)(($_SESSION['currentPage']/($pagesCount+1)) * 100);
+
+
         }
-//                var_dump($_SESSION);
         //до какого вопроса делаем выборку
         $toQuestion = $_SESSION['currentPage'] * 4 - 1;
         //и от какого вопроса

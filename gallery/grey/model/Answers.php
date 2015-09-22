@@ -1,28 +1,36 @@
 <?php
+session_start();
 //Записать в файл все полученные ответы и отправить по почте
 
 class Answers
 {
     function getAnswers($questionsArray)
     {
+        $sessionId = session_id();
+
         foreach($questionsArray as $key=>$question)
         {
             $correctQuestionNumber = $key + 1;
 
-            if(!empty($_SESSION["answer_$correctQuestionNumber"]))
+            $_SESSION["answer_$correctQuestionNumber"];
+
+            if(!empty($_SESSION["answer_$correctQuestionNumber"]) && !empty($_POST['submitAnswers']))
             {
-                $allAnswers[] = $correctQuestionNumber . '. ' .$question. ' ' . $_SESSION["answer_$correctQuestionNumber"] . ' ';
+                $allAnswers[] = $correctQuestionNumber . '. ' .$question. ' ' . $_SESSION["answer_$correctQuestionNumber"] . "\n";
+                $_SESSION['sendAnswers'] = $sessionId;
+
             }
-            elseif(empty($_SESSION["answer_$correctQuestionNumber"]))
+            elseif($_SESSION["answer_$correctQuestionNumber"] == NULL)
             {
+                unset($_SESSION['sendAnswers']);
                 return false;
             }
         }
-        $sessionId = session_id();
-
-        file_put_contents("$sessionId.doc", $allAnswers);
-
-        $this->mail_attachment("$sessionId.doc", "", "keugere@gmail.com", "keugere@gmail.com", "$sessionId", "keugere@gmail.com", "Сообщение от $sessionId", "Привет, Максим, тебе сообщение от $sessionId ");
+        if(!empty($_POST['submitAnswers']))
+        {
+            file_put_contents("$sessionId.doc", $allAnswers);
+            $this->mail_attachment("$sessionId.doc", "", "keugere@gmail.com", "keugere@gmail.com", "$sessionId", "keugere@gmail.com", "Сообщение от $sessionId", "Привет, Максим, тебе сообщение от $sessionId ");
+        }
     }
 
 
@@ -46,7 +54,7 @@ class Answers
         $header .= "Content-Transfer-Encoding: 7bit\r\n\r\n";
         $header .= $message."\r\n\r\n";
         $header .= "--".$uid."\r\n";
-        $header .= "Content-Type: application/msword; name=\"".$name."\"\r\n"; // use different content types here
+        $header .= "Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document; name=\"".$name."\"\r\n";
         $header .= "Content-Transfer-Encoding: base64\r\n";
         $header .= "Content-Disposition: attachment; filename=\"".$filename."\"\r\n\r\n";
         $header .= $content."\r\n\r\n";
