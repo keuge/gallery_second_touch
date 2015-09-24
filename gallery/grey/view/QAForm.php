@@ -28,17 +28,17 @@ class QAForm
             }
             if($_SESSION['currentPage'] == 1 )
             {
-                echo '<input name="nextPage" class="btn btn-warning" type="submit" value="Следующая страница" ></div><br><br>';
+                echo '<div class="previous_next_submit_block"><input name="nextPage" class="btn btn-danger" type="submit" value="Следующая страница"></div><br><br>';
             }
             elseif($_SESSION['currentPage'] == $_SESSION['pagesCount'] + 1)
             {
-                echo '<input name="previousPage" class="btn btn-warning" type="submit" value="Предыдущая страница">'.' ';
-                echo '<input name="submitAnswers" class="btn btn-warning" type="submit" value="Отправить" ></div><br><br>';
+                echo '<div class="previous_next_submit_block"><input name="previousPage" class="btn btn-warning" type="submit" value="Предыдущая страница">'.' ';
+                echo '<input name="submitAnswers" class="btn btn-danger" type="submit" value="Отправить"></div><br><br>';
             }
             else
             {
-                echo '<input name="previousPage" class="btn btn-warning" type="submit" value="Предыдущая страница">'.' ';
-                echo '<input name="nextPage" class="btn btn-warning" type="submit" value="Следующая страница" ></div><br><br>';
+                echo '<div class="previous_next_submit_block"><input name="previousPage" class="btn btn-warning" type="submit" value="Предыдущая страница">'.' ';
+                echo '<input name="nextPage" class="btn btn-danger" type="submit" value="Следующая страница"></div><br><br>';
             }
             ?>
             <?php
@@ -60,7 +60,7 @@ class QAForm
         echo '<div class="question">';
         echo $question['number'] + 1 .'.  '.$question['currentQuestion'];
         echo ' </div></div>';
-        echo '<textarea class="form-control" required name="answer_';?><?php echo $correctQuestionNumber;?>"><?php echo $answer; ?></textarea>
+        echo '<textarea class="form-control" name="answer_';?><?php echo $correctQuestionNumber;?>"><?php echo $answer; ?></textarea>
     <?php
     }
 

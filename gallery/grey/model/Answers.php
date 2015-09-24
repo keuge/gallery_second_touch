@@ -7,6 +7,8 @@ class Answers
     function getAnswers($questionsArray)
     {
         $sessionId = session_id();
+        $date = date('d.m.Y');
+        $fileName = 'grey-brif' . '-' . $date;
 
         foreach($questionsArray as $key=>$question)
         {
@@ -14,22 +16,23 @@ class Answers
 
             $_SESSION["answer_$correctQuestionNumber"];
 
-            if(!empty($_SESSION["answer_$correctQuestionNumber"]) && !empty($_POST['submitAnswers']))
+            if(!empty($_SESSION["answer_$correctQuestionNumber"]))
             {
                 $allAnswers[] = $correctQuestionNumber . '. ' .$question. ' ' . $_SESSION["answer_$correctQuestionNumber"] . "\n";
-                $_SESSION['sendAnswers'] = $sessionId;
 
             }
-            elseif($_SESSION["answer_$correctQuestionNumber"] == NULL)
+            if(empty($_SESSION["answer_$correctQuestionNumber"]))
             {
-                unset($_SESSION['sendAnswers']);
-                return false;
+                $allAnswers[] = $correctQuestionNumber . '. ' .$question . "\n";
+
             }
         }
+
         if(!empty($_POST['submitAnswers']))
         {
-            file_put_contents("$sessionId.doc", $allAnswers);
-            $this->mail_attachment("$sessionId.doc", "", "keugere@gmail.com", "keugere@gmail.com", "$sessionId", "keugere@gmail.com", "Сообщение от $sessionId", "Привет, Максим, тебе сообщение от $sessionId ");
+            $_SESSION['sendAnswers'] = $sessionId;
+            file_put_contents("$fileName.doc", $allAnswers);
+            $this->mail_attachment("$fileName.doc", "", "sergsh10@list.ru", "sergsh10@list.ru", "$fileName", "sergsh10@list.ru", "Сообщение от $fileName", "Привет, Сергей, тебе сообщение от $fileName ");
         }
     }
 

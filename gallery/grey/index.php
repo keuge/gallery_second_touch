@@ -7,7 +7,7 @@
 <body class="full">
 <div class="grey-fox questions-form-background">
     <br><br>
-    <a href="index.php"><img src="img/logo.png"></a>
+    <a href=""><img src="img/logo.png"></a>
     <br><br><br><br>
     <br>
     <?php
