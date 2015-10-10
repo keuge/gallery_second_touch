@@ -58,7 +58,7 @@ class QAForm
         $answer = $_SESSION['answer_'.$correctQuestionNumber];
         echo '<div class="question-block">';
         echo '<div class="question">';
-        echo $question['number'] + 1 .'.  '.$question['currentQuestion'];
+        echo $question['currentQuestion'];
         echo ' </div></div>';
         echo '<textarea class="form-control" name="answer_';?><?php echo $correctQuestionNumber;?>"><?php echo $answer; ?></textarea>
     <?php

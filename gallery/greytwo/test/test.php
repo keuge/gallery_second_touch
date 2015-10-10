@@ -1,24 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-    <title>Bootstrap Example</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="/scripts/jquery-2.1.3.js"></script>
-    <script src="../js/jd.js"></script>
-
 </head>
-
 <body>
+<script src="../js/jquery-2.1.4.js"></script>
+<script>
+    $(document).ready(function()
+    {
+        $("#submit").click(function()
+        {
+            $.ajax({
+                dataType: 'json',
+                type: "POST",
+                url: "ajax.php",
+                data: {'firstQuestion':$('#a').val(), 'secondQuestion':$('#b').val()},
+                //=========================
+                success: function(data)
+                {
+                    $('#response').html(data.summ/*result.question_id + ' ' + result.question_answer*/); // $a.' '.$b
+                }
+                //=========================
+            });
+        });
+    });
+</script>
 
-<div class="progress progress-striped">
-    <div class="bar" style="width: 20%;"></div>
-</div>
 
-<div id="progressbar">
-    <div style="width: <?php echo $percentage; ?>%;"></div>
-</div>
+<?php
+
+$inputs = $_POST;
+$inputs['printdate']='';
+// Инициализация значения, чтобы избежать замечания от PHP о том, что в POST данных нет переменной “printdate”
+
+$assembly = 'Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c';
+$class = 'Microsoft.Office.Interop.Word.ApplicationClass';
+
+$w = new DOTNET($assembly, $class);
+$w->visible = true;
+
+$fn = __DIR__ . '\\template.docx';
+
+$d = $w->Documents->Open($fn);
+
+echo "Документ открыт.<br><hr>";
+
+$flds = $d->Fields;
+$count = $flds->Count;
+echo "В документе $count полей.<br>";
+echo "<ul>";
+$mapping = setupfields();
+
+foreach ($flds as $index => $f)
+{
+    $f->Select();
+    $key = $mapping[$index];
+    $value = $inputs[$key];
+    if ($key == 'gender')
+    {
+        if ($value == 'm')
+            $value = 'Mr.';
+        else
+            $value = 'Ms.';
+    }
+
+    if($key=='printdate')
+        $value=  date ('Y-m-d H:i:s');
+
+    $w->Selection->TypeText($value);
+    echo "<li>Назначаю полю $index: $key значение $value</li>";
+}
+echo "</ul>";
+
+echo "Обработка завершена!<br><hr>";
+echo "Печатаю, пожалуйста, подождите...<br>";
+
+$d->PrintOut();
+sleep(3);
+echo "Готово!";
+
+$w->Quit(false);
+$w=null;
+
+function setupfields()
+{
+    $mapping = array();
+    $mapping[0] = 'gender';
+    $mapping[1] = 'name';
+    $mapping[2] = 'age';
+    $mapping[3] = 'msg';
+    $mapping[4] = 'printdate';
+
+
+    return $mapping;
+}
+$assembly = 'Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c';
+$class = 'Microsoft.Office.Interop.Word.ApplicationClass';
+
+$w = new DOTNET($assembly, $class);
+$w->visible = true;
+?>
+
 </body>
 </html>

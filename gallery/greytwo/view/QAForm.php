@@ -34,11 +34,13 @@ class QAForm
             {
                 echo '<div class="previous_next_submit_block"><input name="previousPage" class="btn btn-warning" type="submit" value="Предыдущая страница">'.' ';
                 echo '<input name="submitAnswers" class="btn btn-danger" type="submit" value="Отправить"></div><br><br>';
+
             }
             else
             {
                 echo '<div class="previous_next_submit_block"><input name="previousPage" class="btn btn-warning" type="submit" value="Предыдущая страница">'.' ';
                 echo '<input name="nextPage" class="btn btn-danger" type="submit" value="Следующая страница"></div><br><br>';
+
             }
             ?>
             <?php
@@ -58,7 +60,7 @@ class QAForm
         $answer = $_SESSION['answer_'.$correctQuestionNumber];
         echo '<div class="question-block">';
         echo '<div class="question">';
-        echo $question['number'] + 1 .'.  '.$question['currentQuestion'];
+        echo $question['currentQuestion'];
         echo ' </div></div>';
         echo '<textarea class="form-control" name="answer_';?><?php echo $correctQuestionNumber;?>"><?php echo $answer; ?></textarea>
     <?php

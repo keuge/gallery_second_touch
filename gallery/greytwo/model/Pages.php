@@ -38,8 +38,6 @@ class Pages
             }
             $_SESSION['currentPage'] = $_SESSION['currentPage'] + 1;
             $_SESSION['percentQuestion'] = (integer)(($_SESSION['currentPage']/($pagesCount+1)) * 100);
-
-
         }
         //если нажата кнопка "предыдущая страница" и номер страница больше 1, то передвигаемся на одну страницу назад
         elseif(!empty($_POST['previousPage']) && $_SESSION['currentPage'] >= 2)
@@ -58,8 +56,6 @@ class Pages
             }
             $_SESSION['currentPage'] = $_SESSION['currentPage'] - 1;
             $_SESSION['percentQuestion'] = (integer)(($_SESSION['currentPage']/($pagesCount+1)) * 100);
-
-
         }
         //до какого вопроса делаем выборку
         $toQuestion = $_SESSION['currentPage'] * 4 - 1;
@@ -74,7 +70,6 @@ class Pages
                 $questionsArrayOnPage[$i] = $questionsArray[$i];
             }
         }
-
         return $questionsArrayOnPage;
     }
 }

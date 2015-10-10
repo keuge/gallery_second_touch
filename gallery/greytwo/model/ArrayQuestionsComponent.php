@@ -1,5 +1,4 @@
 <?php
-session_start();
 //из текстового файла каждую строку записать в массив
 class ArrayQuestionsComponent
 {
